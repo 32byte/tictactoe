@@ -1,10 +1,9 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const crypto = require('crypto');
-const { isUndefined } = require('util');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const jsonParser = bodyParser.json();
 

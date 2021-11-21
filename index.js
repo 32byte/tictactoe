@@ -169,6 +169,10 @@ app.get('/games/:gameCode', (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    return res.send("App running!");
+});
+
 app.listen(port, () => {
   console.log(`Tic-Tac-Toe Online running on http://localhost:${port}`);
 });

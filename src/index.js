@@ -6,6 +6,7 @@ import './index.css';
 import logo from './logo.png';
 
 const crypto = require('crypto');
+const HEROKU_URL = 'https://fierce-oasis-65802.herokuapp.com';
 
 function playerWon(board) {
     // horizontal
@@ -70,7 +71,7 @@ class PlayMenu extends React.Component {
 
 class Field extends React.Component {
     onClick = () => {
-        fetch('http://localhost:3001/place', {
+        fetch(HEROKU_URL + '/place', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +89,7 @@ class Field extends React.Component {
     render() {
         return (
             <div className='box'>
-                <button className={this.props.highlight ? 'field highlight' : 'field'} onClick={this.onClick}>{this.props.value == 0 ? '' : (this.props.value == 1 ? 'X' : 'O')}</button>
+                <button className={this.props.highlight ? 'field highlight' : 'field'} onClick={this.onClick}>{this.props.value === 0 ? '' : (this.props.value === 1 ? 'X' : 'O')}</button>
             </div>
         )
     }
@@ -152,7 +153,7 @@ class Game extends React.Component {
     }
 
     fetchBoard = () => {
-        fetch('http://localhost:3001/games/' + this.state.gameCode)
+        fetch(HEROKU_URL + '/games/' + this.state.gameCode)
             .then(res => res.json())
             .then(data => {
                 this.updateBoard(data);
@@ -197,7 +198,7 @@ class App extends React.Component {
     connectGame = (gameCode) => {
         const playerID = crypto.randomBytes(8).toString('hex');
 
-        fetch('http://localhost:3001/connect', {
+        fetch(HEROKU_URL + '/connect', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -221,7 +222,7 @@ class App extends React.Component {
     newGame = () => {
         const playerID = crypto.randomBytes(8).toString('hex');
 
-        fetch('http://localhost:3001/new-game', {
+        fetch(HEROKU_URL + '/new-game', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
